@@ -4,16 +4,15 @@ const Sidepanel = (props) =>(
     <div id="sidepanel">
     <div id="profile">
         <div className="wrap">
-            <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" className="online" alt="" />
-            <p>Mike Ross</p>
+            <h3>Contact List</h3>
             <i className="fa fa-chevron-down expand-button" aria-hidden="true"></i>
             <div id="status-options">
                 <ul>
                     <li id="status-online" className="active">
                     <span className="status-circle"></span> <p>Online</p></li>
-                    <li id="status-away"><span className="status-circle"></span> <p>Away</p></li>
+                    {/* <li id="status-away"><span className="status-circle"></span> <p>Away</p></li>
                     <li id="status-busy"><span className="status-circle"></span> <p>Busy</p></li>
-                    <li id="status-offline"><span className="status-circle"></span> <p>Offline</p></li>
+                    <li id="status-offline"><span className="status-circle"></span> <p>Offline</p></li> */}
                 </ul>
             </div>
             
@@ -24,7 +23,7 @@ const Sidepanel = (props) =>(
         <input type="text" placeholder="Search contacts..." />
     </div>
     <div id="contacts">
-        <ul>
+        {/* <ul>
             <li className="contact">
                 <div className="wrap">
                     <span className="contact-status online"></span>
@@ -45,11 +44,9 @@ const Sidepanel = (props) =>(
                     </div>
                 </div>
             </li>
-        </ul>
+        </ul> */}
     </div>
     <div id="bottom-bar">
-        <button id="addcontact"><i className="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
-        <button id="settings"><i className="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
     </div>
 </div>
 ) 

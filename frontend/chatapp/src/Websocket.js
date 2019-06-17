@@ -10,7 +10,6 @@ class WebsocketService{
         }
         constructor(){
             this.socketRef = null ;
-            
         }
 
         connect(){
@@ -35,7 +34,6 @@ class WebsocketService{
                 this.connect();
             }
         }
-        
         
         socketNewMessage(data){
             const ParsedData = JSON.parse(data);

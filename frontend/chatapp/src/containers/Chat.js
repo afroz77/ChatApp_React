@@ -1,6 +1,7 @@
 import React from 'react';
-import Sidepanel from './sidepanel/sidepanel'
-import WebSocketInstance from '../Websocket'
+import Sidepanel from './sidepanel/sidepanel';
+import WebSocketInstance from '../Websocket';
+import Button from '@material-ui/core/Button';
  
 class Chat extends React.Component{
     constructor(props){
@@ -36,14 +37,36 @@ class Chat extends React.Component{
             messages : [...this.state.messages, message]
         })
     }
+
     setMessages(messages){
         this.setState({
             messages : messages.reverse()
         });
     }
 
+    messageChangeHandler = e =>{
+        e.preventDefault();
+        this.setState({
+            message : e.target.value     
+        });
+    }
+
+    sendMessageHandler = e =>{
+        e.preventDefault();
+        const messageObject = {
+            from : 'admin',
+            content : this.state.message
+        }
+        if (this.state.message !== ""){
+            WebSocketInstance.newChatMessage(messageObject)
+            this.setState({
+                message : ""
+            });
+        }
+    }
+
     renderMessages = (messages) =>{
-        const currentUser = 'admin1';
+        const currentUser = 'admin';
         console.log(messages)
         return messages.map(message =>(
             <li
@@ -52,6 +75,10 @@ class Chat extends React.Component{
                 <p>
                     { message.content }
                 </p>
+                <br />
+                <small>
+                    {message.timestamp} 
+                </small>
             </li>
         ));
     }
@@ -63,13 +90,7 @@ class Chat extends React.Component{
     <Sidepanel  />
         <div className="content">
             <div className="contact-profile">
-                <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                <p></p>
-                <div className="social-media">
-                    <i className="fa fa-facebook" aria-hidden="true"></i>
-                    <i className="fa fa-twitter" aria-hidden="true"></i>
-                    <i className="fa fa-instagram" aria-hidden="true"></i>
-                </div>
+                <p>USERNAME</p>
             </div>
             <div className="messages">
                 <ul id='chat-log'>
@@ -78,12 +99,21 @@ class Chat extends React.Component{
                     }
                 </ul>
             </div>
+           
             <div className="message-input">
-                <div className="wrap">
-                    <input id="chat-message-input" type="text" size="100"/><br/>
-                    <input id="chat-message-submit" type="button" value="Send"/>
-                </div>
+                <input 
+                    onChange = {this.messageChangeHandler}
+                    value = {this.state.message}
+                    id="chat-message-input" 
+                    type="text" 
+                    size="100"/><span>
+                    {/* <input id="chat-message-submit" type="button" value="Send"/> */}
+                    <Button variant="contained" onClick = {this.sendMessageHandler} color="primary">Send
+                    </Button></span>
+               
+                
             </div>
+            
         </div>
     </div>
         )
